@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HttpClient_3</string>
+    <string name="red">red</string>
+    <string name="green">green</string>
+    <string name="blue">blue</string>
+    <string name="text_balances_header">"BALANCES, DEPOSITS &amp; WITHDRAWALS"</string>
+</resources>
