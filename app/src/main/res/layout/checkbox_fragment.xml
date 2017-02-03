@@ -16,6 +16,16 @@
         android:layout_height="wrap_content"
         android:text="Новый компонент 2"
         android:id="@+id/checkBox2" android:layout_gravity="center_horizontal" android:checked="false"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_get_balance"
+        android:text="@string/bt_text_getbalance"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_get_balance"
+        android:text="@string/bt_text_getbalance"/>
     <ListView
         android:id="@+id/lv1"
         android:layout_width="match_parent"

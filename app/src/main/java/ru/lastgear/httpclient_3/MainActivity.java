@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     final String LOG_TAG ="qqq";
     TextView tv2;
     Button bt_get_som;
+    public String mStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +116,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
 
-    private class PostClass extends AsyncTask<String, Void, String> {
+    public class PostClass extends AsyncTask<String, Void, String> {
 
 
         String method = null;
