@@ -1,15 +1,16 @@
 package ru.lastgear.httpclient_3.fragments;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +43,9 @@ import ru.lastgear.httpclient_3.R;
  */
 
 public class CheckBoxFragment extends Fragment implements View.OnClickListener {
+    ArrayList<MValute> arrayMClass;
+    myAdapter mAdapter;
+
 
     final String LOG_TAG ="qqq";
 
@@ -401,7 +405,7 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
         private ArrayList get_returnBalancesList (String s) {
             Log.e(LOG_TAG , "НАЧАЛО");
             String parseStr = null;
-            ArrayList<Valute> arrayList = new ArrayList<Valute>();
+            ArrayList<MValute> arrayList = new ArrayList<MValute>();
             String tmp;
 
             try {
@@ -413,16 +417,16 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
                 float f;
                 Iterator key = jsonObject.keys();
                 while (key.hasNext()) {
-                    Valute valute = new Valute();
+                    MValute MValute = new MValute();
                     String k = key.next().toString();
                     f = Float.parseFloat(jsonObject.getString(k));
-                    if (f > 0) {
+                   // if (f > 0) {
                         System.out.println("Key : " + k + ", value : " + jsonObject.getString(k));
-                        valute.ValName = k;
-                        valute.valValue = jsonObject.getString(k);
-                        arrayList.add(valute);
+                        MValute.val1 = k;
+                        MValute.val2 = jsonObject.getString(k);
+                        arrayList.add(MValute);
                     }
-                }
+               // }
                 //System.out.println( "test " + arrayList.get(2).valValue);
 
                 tmp = jsonObject.toJSONArray( jsonObject.names()).toString();
@@ -439,14 +443,52 @@ public class CheckBoxFragment extends Fragment implements View.OnClickListener {
             return arrayList;
         }
 
-        class Valute {
-            public String ValName;
-            public String valValue;
-        }
+
 
 
     }
 
+    public class MValute {
+        public String val1;
+        public String val2;
+    }
 
+    public class myAdapter extends BaseAdapter {
+        private LayoutInflater mLayoutInflater;
+
+        public myAdapter (Context ctx) {
+            mLayoutInflater = LayoutInflater.from(ctx);
+        }
+
+        public int getCount () {
+            return arrayMClass.size();
+        }
+
+        public Object getItem (int position) {
+            return position;
+        }
+
+        public long getItemId (int position) {
+            return position;
+        }
+
+
+
+        public String getString (int position) {
+            return arrayMClass.get(position).val1 + " (" + arrayMClass.get(position).val2 + ")";
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null)
+                convertView = mLayoutInflater.inflate(R.layout.valute_list, null);
+
+            TextView sign = (TextView)convertView.findViewById(R.id.Sign);
+            sign.setText(arrayMClass.get(position).val1);
+
+            TextView date = (TextView)convertView.findViewById(R.id.Date);
+            date.setText(arrayMClass.get(position).val2);
+            return convertView;
+        }
+    }
 
 }
